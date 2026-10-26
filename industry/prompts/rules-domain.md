@@ -1,45 +1,60 @@
 
-【AI 领域翻译规则 — 本平台 100% 是 AI/ML/LLM 行业内容，严格遵守】
+【物流领域翻译规则 — 本平台是全球物流行业内容，严格遵守】
 
-1. 歧义默认值：以下词在中文有非 AI 歧义，**一律按 AI 含义翻译**：
-   - LLM = 大语言模型（绝不译"法学硕士"/"Master of Laws"）
-   - Token / tokens = 模型 token（保留英文；绝不译"代币"/"令牌"）
-   - Transformer = Transformer 架构（保留英文；不译"变压器"）
-   - Diffusion = 扩散模型（AI 生成，不是物理扩散）
-   - Agent / Agentic = AI 智能体 / 智能体的（不译"代理人"/"中介"）
-   - Alignment = 对齐（AI 安全语境）
-   - Inference = 推理（模型生成）
-   - Reasoning = 推理（注意：与 inference 都译"推理"，必要时用"链式推理"区分 CoT；reasoning model 指 o1/o3/R1 这类思考型模型）
-   - Embedding = 嵌入向量（也可保留英文）
-   - Distillation = 知识蒸馏
-   - Hallucination = 模型幻觉
-   - Fine-tune / Fine-tuning = 微调
-   - Pretrain / Pretraining = 预训练
-   - Context window = 上下文窗口
-   - Prompt = 提示词
-   - Skill / Skills = 技能（Claude 等 Agent 框架的能力包，不译"特长"）
+1. 歧义默认值：以下词在中文有非物流歧义，**一律按货运含义翻译**：
+   - Carrier = 承运人（船司、航司、铁路或公路承运人；不译“载体”，也不按电信运营商理解）
+   - Forwarder / freight forwarder = 货运代理（也可写“货代”）
+   - NVOCC = 无船承运人（保留英文缩写）
+   - Charter / chartering = 租船（不译“宪章”）
+   - Blank sailing = 空班
+   - Bunker / bunker surcharge = 船用燃油 / 燃油附加费（不译“地堡”）
+   - Draft = 吃水（航运语境；不译“草稿”）
+   - Slot = 舱位
+   - Rotation = 港序
+   - String / loop / service = 航线串 / 航线环 / 航线服务（保留服务代码原文）
+   - Demurrage = 滞期费；Detention = 滞箱费（二者不要互换）
+   - FCL / LCL = 整箱 / 拼箱
+   - CY / CFS = 集装箱堆场 / 集装箱货运站
+   - Bill of lading / B/L = 提单；Air waybill / AWB = 空运单
+   - Consignee / shipper / notify party = 收货人 / 托运人 / 通知方
+   - Last mile = 末端配送
+   - Hub = 枢纽（港口、机场、铁路场站或分拨中心，按原文对象写）
+   - Disruption = 运营中断（事故、罢工、封港、运河阻断；不要把普通延误都写成中断）
+   - Spot rate / contract rate = 即期运价 / 合约运价
+   - GRI = 一般性费率上调（保留 GRI）
+   - PSS = 旺季附加费；BAF = 燃油附加费；CAF = 货币调整附加费；THC = 码头操作费
+   - Reefer = 冷藏箱；Ro-Ro = 滚装；dry bulk = 干散货；tanker = 油轮
+   - Freighter = 货机；belly cargo = 腹舱货
+   - Truckload / LTL = 整车 / 零担；drayage = 短驳；intermodal = 多式联运
+   - Chassis = 集装箱底盘车（北美码头语境；不按汽车零件翻译）
+   - Cross-dock = 越库
+   - 3PL / 4PL = 第三方物流 / 第四方物流
+   - Sanction = 制裁；embargo = 禁运；customs = 海关（不译“风俗”）
+   - FTA = 自由贸易协定（不要译成监管机构，除非原文就是机构名）
 
 2. 以下专有名词**一律保留英文原文**，不翻译不加中文括注：
-   - AI 公司：OpenAI / Anthropic / Google DeepMind / xAI / Meta AI / Mistral / DeepSeek / Cohere / HuggingFace（HF）/ Runway / ElevenLabs / Suno / Pika / Midjourney / Perplexity
-   - 模型族（举例 + 通用规则）：GPT / Claude / Gemini / Llama / Qwen / Grok / o 系列 / DeepSeek / Mistral / Mixtral / Phi / Sora / Veo / Imagen
-     **规则**：任何大模型族名、产品代号一律保留英文
-   - 模型版本号（举例 + 通用规则）：GPT-5 / Claude 4.7 / Claude Sonnet 4.6 / Llama 4 / Gemini 3 / o3 / o4 / DeepSeek-V4 / Qwen3.7
-     **规则**：版本号一字不改（包括字母数字后缀如 4o / 4.7 / 405B / V4 / R1），绝不"翻译性扩写"（不要把 "405B" 译成 "4050 亿"，不要把 "V4" 译成 "第 4 代"）
-   - 技术缩写（举例 + 通用规则）：LLM / RAG / RLHF / DPO / LoRA / QLoRA / PEFT / MoE / CoT / ReAct / KV cache / SOTA / AGI / MCP / ADK / NPU / GPU / TPU
-     **规则**：任何 2-5 字母的全大写缩写，默认按 AI/ML 含义保留英文
-   - 评测基准（举例 + 通用规则）：MMLU / GPQA / HumanEval / SWE-bench / SWE-bench Verified / AIME / HLE / ARC-AGI / ARC-AGI 2 / MT-Bench / Chatbot Arena / Aider Polyglot / LiveCodeBench
-     **规则**：以 -bench / -eval 结尾或全大写的评测名一律保留英文
-   - AI 工具/产品：Cursor / Copilot / Codex / Aider / Devin / Cline / Claude Code / Windsurf / Zed / v0 / Bolt / Lovable / Replit Agent
-   - Agent 框架：LangChain / LangGraph / LlamaIndex / CrewAI / AutoGen / Pydantic AI / Vercel AI SDK / DSPy
-   - 推理/部署：Ollama / vLLM / SGLang / TensorRT / Triton / CUDA / ROCm
-   - 通用技术：API / SDK / CLI / IDE / SaaS / CDN / SSO / OAuth / JWT / WebSocket / SSE / gRPC
+   - 运价与运力指数：SCFI / CCFI / NCFI / FBX / WCI / BDI / BAI / TAC / Xeneta
+     **规则**：指数代号和点位原文保留，不把点位改写成“约一千多点”
+   - 箱量与设备：TEU / FEU / ULD
+     **规则**：TEU、FEU 不译成含糊的“箱”；数字与单位一字不改
+   - 贸易术语：Incoterms，以及 FOB / CIF / CFR / EXW / FCA / DAP / DDP / DDU
+     **规则**：术语缩写保留英文，不改写成笼统的“到岸价”“离岸价”除非原文就是这样解释
+   - 监管与公约缩写：IMO / SOLAS / ISM / ISPS / VGM / HS code / FMC / CBP
+     **规则**：2–5 个字母的全大写行业缩写默认保留英文；FMC 是美国联邦海事委员会，CBP 是美国海关与边境保护局，不要猜成别的机构
+   - 航线与航次代码：如 AE7、FE2、3E，以及船名、航次号
+     **规则**：服务代码、船名、航次号一字不改，不“翻译性扩写”
+   - 通用技术：API / EDI / SaaS / ETA / ETD / GPS / AIS
+     ETA、ETD 可在首次出现时写“预计到港（ETA）”“预计离港（ETD）”，同一篇里后续保持一致
 
-3. 中国厂商**优先用官方中文品牌名**（首次出现可双标"千问（Qwen3）"，后续选一种保持一致）：
-   - 千问（Qwen）/ 文心一言 / 智谱（GLM）/ 月之暗面（Kimi）/ 深度求索（DeepSeek）/ 阶跃星辰（Step）/ 零一万物（Yi）/ 百川 / 豆包（字节）/ 混元（腾讯）/ 可灵（Kling，快手）/ 即梦（Jimeng，字节）/ MiniMax（不译）/ 美团 LongCat / 昆仑万维 Skywork / 面壁 MiniCPM / 华为昇腾 / 寒武纪
+3. 承运人与物流公司**优先用业内通行中文名**（首次出现可双标，如“马士基（Maersk）”，后续选一种保持一致）：
+   - 船司：马士基（Maersk）/ 地中海航运（MSC）/ 达飞（CMA CGM）/ 中远海运（COSCO SHIPPING）/ 赫伯罗特（Hapag-Lloyd）/ 海洋网联（ONE）/ 长荣（Evergreen）/ 现代商船（HMM）/ 阳明（Yang Ming）/ 以星（ZIM）
+   - 快递与合同物流：DHL / FedEx / UPS 保留英文；顺丰、京东物流、菜鸟、极兔、德迅（Kuehne+Nagel）、德铁信可（DB Schenker）用通行中文名
+   - 航运联盟用官方名称，不自造联盟简称：Gemini Cooperation、Ocean Alliance、Premier Alliance 等保留官方写法；有通行中文时首次可双标
 
-4. 代码 / 命令 / URL / 数字单位 **一字不改**保留：
+4. 港口与枢纽：业内已有稳定中文名的用中文（上海港、宁波舟山港、青岛港、盐田港、新加坡港、鹿特丹港、安特卫普、汉堡港、洛杉矶港、长滩港、萨凡纳港、釜山港、杰贝阿里港、巴拿马运河、苏伊士运河）；没有稳定译名的保留英文，不要临时音译一个新名字。
+
+5. 代码 / 命令 / URL / 数字单位 **一字不改**保留：
    - 反引号代码 `code` 不翻译
-   - 命令如 /code-review、pip install、npm run 不译（不要译"代码审查"）
-   - URL 原样
-   - 数字+单位：8k context / 175B params / 3.5x speedup / $3 per M tokens / 99.9%
-   - 金额、参数量、比例、区间必须保留原文的阿拉伯数字和单位；不要把 $10B-$100B 改写成“数百亿至数千亿美元”等中文数量词
+   - 订舱号、提单号、箱号、航次号、网址原样
+   - 数字+单位：2,400 TEU / $1,200/FEU / 14 days free time / +18% / 1,432.55 points
+   - 金额、点位、比例、箱量、天数和区间必须保留原文的阿拉伯数字和单位；不要把 $800–$1,200/FEU 改写成“数百至上千美元”等中文数量词
