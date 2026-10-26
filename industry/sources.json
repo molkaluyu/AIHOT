@@ -441,6 +441,156 @@
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
+    },
+    {
+      "id": "web-mot-jiaotongyaowen",
+      "name": "交通运输部·交通要闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.mot.gov.cn/xinwen/jiaotongyaowen/index.html",
+        "parseMode": "html",
+        "itemSelector": "ul.news-list > li.news-item",
+        "linkSelector": "a.news-link",
+        "titleSelector": "span.news-title",
+        "publishedAtSelector": "span.news-date",
+        "allowUrlPrefixes": [
+          "https://www.mot.gov.cn/xinwen/jiaotongyaowen/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": [
+        "官方",
+        "政策",
+        "中文"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cnss-shipping",
+      "name": "海事服务网CNSS·航运",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cnss.com.cn/html/cnss/finance/index.html",
+        "parseMode": "html",
+        "itemSelector": "ul.news-list-ul > li.news-list-li",
+        "linkSelector": "a",
+        "titleSelector": "p.text-title",
+        "publishedAtSelector": "span.time",
+        "allowUrlPrefixes": [
+          "https://www.cnss.com.cn/html/cnss/finance/article/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "海运",
+        "中文"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cnss-port",
+      "name": "海事服务网CNSS·港口",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cnss.com.cn/html/cnss/port/index.html",
+        "parseMode": "html",
+        "itemSelector": "ul.news-list-ul > li.news-list-li",
+        "linkSelector": "a",
+        "titleSelector": "p.text-title",
+        "publishedAtSelector": "span.time",
+        "allowUrlPrefixes": [
+          "https://www.cnss.com.cn/html/cnss/port/article/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "枢纽",
+        "中文"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-jiemian-wuliu",
+      "name": "界面新闻·物流",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.jiemian.com/tags/1710/5.html",
+        "parseMode": "html",
+        "itemSelector": "div.tag-list-news div.news-view",
+        "linkSelector": "div.news-header h3 a",
+        "titleSelector": "div.news-header h3 a",
+        "publishedAtSelector": "span.date",
+        "allowUrlPrefixes": [
+          "https://www.jiemian.com/article/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "综合",
+        "中文"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cnss-ship",
+      "name": "海事服务网CNSS·船舶",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cnss.com.cn/html/cnss/ship/index.html",
+        "parseMode": "html",
+        "itemSelector": "ul.news-list-ul > li.news-list-li",
+        "linkSelector": "a",
+        "titleSelector": "p.text-title",
+        "publishedAtSelector": "span.time",
+        "allowUrlPrefixes": [
+          "https://www.cnss.com.cn/html/cnss/ship/article/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "海运",
+        "中文"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
     }
   ]
 }
