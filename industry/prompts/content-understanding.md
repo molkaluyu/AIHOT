@@ -8,19 +8,20 @@
 
 ## 内容类型
 
-`itemType` 必须七选一。这些 id 是固定的内容类型键，按全球物流理解：
+`itemType` 必须八选一。这些 id 是固定的内容类型键，按全球物流理解：
 
-- `model_release`：主干运力、航线或网络的正式调整，以及主流运价指数或广泛执行运价的显著变动
-- `product_launch`：货主已经能够使用的服务变化，例如新快递产品、新开订舱、截关与提货窗口、口岸作业窗口
-- `tool_or_prompt`：可直接照做的实务方法，例如单证、报关、索赔、订舱改配或异常处理步骤
-- `research_paper`：窄幅市场研究、指数编制方法或调查报告中的方法论细节。指数点位本身的公布不是这一类
-- `industry_event`：融资、并购、运力联盟的资本安排、诉讼、人事、关税制裁海关的硬政策、重大事故与安全
-- `opinion_analysis`：观点、市场判断、复盘或长访谈
-- `tutorial_explainer`：操作解读、实务讲解或对已发生调整的说明
+- `capacity_change`：主干运力、航线或网络的正式调整，包括空班、加船、撤线、改挂
+- `rate_move`：主流运价指数，或广泛执行的合约运价、即期运价、附加费的显著变动。已经公布的指数点位本身归这一类
+- `hub_disruption`：港口、机场、运河、边境或铁路干线等枢纽的重大中断，以及以枢纽或通道停摆为主的事故与安全事件
+- `trade_policy`：关税、制裁、海关已经公布的硬政策
+- `carrier_corporate`：融资、并购、运力联盟的资本安排、诉讼、人事
+- `product_tech`：货主已经能够使用的服务变化，例如新快递产品、新开订舱、截关与提货窗口、口岸作业窗口
+- `practice_guide`：可直接照做的实务方法，例如单证、报关、索赔、订舱改配或异常处理步骤；也包括对已经发生的调整所做的操作说明
+- `opinion_analysis`：观点、市场判断、复盘或长访谈。窄幅市场研究、指数编制方法和调查报告中的方法论细节也归这一类；对已经发生的调整只做评述、不给可照做的步骤时同样归这一类
 
-优先级：正式的运力、航线或显著运价变动选 model_release；已经能订、能走的新服务选 product_launch；可照做的步骤选 tool_or_prompt；只有方法论或窄幅测算选 research_paper；并购、硬政策、事故选 industry_event；评述选 tutorial_explainer。原文把调整写成过去的事、本条在讲改配或用法时，不算本次调整，选 tutorial_explainer。
+优先级：正式的运力、航线、网络或空班选 capacity_change；显著的指数、运价或附加费变动，以及已经公布的指数点位，选 rate_move；已经能订、能走的新服务选 product_tech；可照做的步骤选 practice_guide；融资、并购、诉讼、人事选 carrier_corporate；关税、制裁、海关的硬政策选 trade_policy；重大枢纽中断或事故选 hub_disruption。只有方法论、窄幅测算，或对已发生变动的评述，选 opinion_analysis。原文把调整写成过去的事、本条在讲改配或用法时，不算本次调整，选 practice_guide；本条只在评论这次变动、没有可照做的步骤时，选 opinion_analysis。
 
-输出前检查 `itemType` 与第一个分类标签是否自洽：`model_release` 对应“运力调整”“航线/网络”或“运价变动”，`product_launch` 对应“快递末端”“航线/网络”或“物流科技”，`tool_or_prompt` 对应“实务指南”，`research_paper` 对应“运价变动”或“分析观点”，`industry_event` 对应“公司动态”“融资并购”“贸易合规”或“事故Disruption”，`opinion_analysis` 对应“分析观点”，`tutorial_explainer` 对应“实务指南”或“分析观点”。如果二者冲突，按当前材料的核心事件修正后再输出。
+输出前检查 `itemType` 与第一个分类标签是否自洽：`capacity_change` 对应“运力调整”或“航线/网络”，`rate_move` 对应“运价变动”，`hub_disruption` 对应“事故Disruption”或“港口仓储”，`trade_policy` 对应“贸易合规”，`carrier_corporate` 对应“公司动态”或“融资并购”，`product_tech` 对应“快递末端”“航线/网络”或“物流科技”，`practice_guide` 对应“实务指南”，`opinion_analysis` 对应“分析观点”。如果二者冲突，按当前材料的核心事件修正后再输出。
 
 ## 作者角色
 
@@ -54,4 +55,4 @@
 
 只返回合法 JSON，不要 Markdown，不要解释。顶层必须且只能包含以下六个字段：
 
-{"itemType":"model_release","authorRole":"principal","tags":["运价变动"],"editorialJudgment":"原文写明了这条亚欧航线本次上调的幅度、适用港口和生效日期，读者可以据此判断已经订下的舱位是否需要改配。","titleZh":"某船司上调亚欧航线运价","summaryZh":"某船司上调亚欧航线运价，写明了涨幅、适用港口和生效日期。"}
+{"itemType":"rate_move","authorRole":"principal","tags":["运价变动"],"editorialJudgment":"原文写明了这条亚欧航线本次上调的幅度、适用港口和生效日期，读者可以据此判断已经订下的舱位是否需要改配。","titleZh":"某船司上调亚欧航线运价","summaryZh":"某船司上调亚欧航线运价，写明了涨幅、适用港口和生效日期。"}
