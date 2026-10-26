@@ -12,57 +12,69 @@
  * feedLabel 是分类 RSS 标题里的名字（不写就用 label）。公开接口、RSS 和 MCP 里要把一类并进另一类发布，写在站点设置里（site/site.ts 的 PUBLIC_CATEGORIES）。
  */
 export const CATEGORIES = [
-  { key: "ai-models", tagColor: "indigo", label: "模型", feedLabel: "AI 模型", section: "模型发布/更新", guide: "模型本身的发布、版本、权重开放、能力或价格变化，以及既有榜单上的模型成绩。公布一次跑分不是发布新基准，也不是教程。" },
-  { key: "ai-products", tagColor: "turquoise", label: "产品", feedLabel: "AI 产品", section: "产品发布/更新", guide: "可使用的 AI 产品、功能、应用、工具、API、平台和工程组件的发布更新。模型厂商发布的推理框架、算子库、硬件适配组件仍是产品，不能因为厂商名归成模型。" },
-  { key: "industry", tagColor: "orange", label: "行业", feedLabel: "行业动态", section: "行业动态", guide: "已发生的公司经营、融资并购、人事、合作、诉讼、政策、真实安全事故及调查进展。新闻由当事人发帖、带有态度，也不因此变成观点。" },
-  { key: "paper", tagColor: "violet", label: "论文", feedLabel: "论文", section: "论文研究", guide: "以新研究方法、实验设计与发现为核心的论文、技术报告、新基准或研究数据集。系统性红队实验属于研究；既有榜单成绩归模型，真实事故的新闻调查归行业。" },
-  { key: "tip", tagColor: "green", label: "教程", section: "技巧与观点", guide: "读者可以照着使用的方法、提示词、工具用法、工程实践复盘与技术讲解。重点是可复用的做法；单纯发布工具归产品，只有态度和预测而无做法归观点。", commentary: true },
-  { key: "opinion", tagColor: "purple", label: "观点", section: "技巧与观点", guide: "重点是作者的解释、判断、主张、预测、评论或访谈观点。讨论市场不自动归行业，作者是名人不自动归观点。", commentary: true },
+  { key: "ocean", tagColor: "blue", label: "海运", feedLabel: "海运", section: "海运与航线", guide: "班轮、舱位、航线和船司运力：空班、跳港、航线调整，以及主因在船期或舱位一侧的港口拥堵。码头、仓库等设施本身的启用与扩建归枢纽；运价指数和现货/合约报价归运价。" },
+  { key: "air", tagColor: "turquoise", label: "空运", feedLabel: "空运", section: "空运与运力", guide: "货机与客机腹舱、空运价格和机场货运运力。机场货站、跑道等设施本身归枢纽；只报运价指数、不讲一条航线或一家航司运力的归运价。" },
+  { key: "land", tagColor: "green", label: "陆运", feedLabel: "陆运", section: "陆运与多式联运", guide: "公路、铁路、中欧班列、卡航和跨境陆运，以及海陆空之间的联运安排。只讲末端派送的归快递；口岸的关税、制裁和海关规则归政策。" },
+  { key: "express", tagColor: "lime", label: "快递", feedLabel: "快递", section: "快递与末端", guide: "国际快递、跨境电商物流和末端配送。干线海运、空运、铁路本身归对应运输方式；快递公司的融资并购、人事和诉讼归行业。" },
+  { key: "rates", tagColor: "orange", label: "运价", feedLabel: "运价", section: "运价与市场", guide: "运价指数、现货与合约价格、运力供需和旺淡季。某一条航线或一家船司、航司的具体舱位调整归海运、空运或陆运；公司经营本身归行业。" },
+  { key: "hubs", tagColor: "wathet", label: "枢纽", feedLabel: "枢纽", section: "港口仓储", guide: "港口码头、仓库、转运中心和基础设施，看的是设施侧。拥堵、跳港若主因是船期和舱位，归海运；仓储系统软件归科技。" },
+  { key: "policy", tagColor: "carmine", label: "政策", feedLabel: "政策", section: "贸易与合规", guide: "关税、制裁、海关、出口管制和贸易协定。公司因此改航线或运力，动作本身归对应运输方式；诉讼和并购归行业。" },
+  { key: "industry", tagColor: "violet", label: "行业", feedLabel: "行业", section: "公司与并购", guide: "船司、货代和 3PL 已发生的融资并购、人事、合作与诉讼。运价、运力或政策文本不因出现公司名就归到这里。" },
+  { key: "tech", tagColor: "indigo", label: "科技", feedLabel: "科技", section: "物流科技", guide: "TMS、WMS、货物可见性、自动化和物流数字化产品。用这些系统完成的一次运输操作仍归对应运输方式；公司融资归行业。" },
+  { key: "opinion", tagColor: "purple", label: "观点", feedLabel: "观点", section: "分析与观点", guide: "重点是作者的判断、预测、评论或访谈观点。可复用的做法不要挤在这里，归它讲解的那种运输、枢纽或科技。讨论市场不自动归运价，已发生的事实不因带态度变成观点。", commentary: true },
 ] as const satisfies ReadonlyArray<{ key: string; tagColor: string; label: string; feedLabel?: string; section: string; guide: string; commentary?: true }>;
 
 /**
- * 这个行业最受关注的一类发布（AI 行业是新模型）：日报报头的“N 个新模型”、改分类后修订已出的报告都按它数。
+ * 这个行业最受关注的一类发布（物流站是运价信号）：日报报头的计数、改分类后修订已出的报告都按它数。
  * category 是类别，tag 是标签，两者都对上才算；unit 接在数字后面。
  * 没有这样一类的行业设成 null，报头就不显示这个数。
  */
-export const RELEASE: { category: string; tag: string; unit: string } | null = { category: "ai-models", tag: "模型发布", unit: "个新模型" };
+export const RELEASE: { category: string; tag: string; unit: string } | null = { category: "rates", tag: "运价变动", unit: "条运价信号" };
 
 /** 周报月报的总述可以直接写、不必在报道里找到出处的行业通用词（小写）。站名会自动算进去。 */
-export const PLAIN_TERMS: readonly string[] = ["ai", "api", "llm", "gpu", "agi", "ceo", "ipo"];
+export const PLAIN_TERMS: readonly string[] = [
+  "teu", "feu", "fcl", "lcl", "bl", "bol", "demurrage", "detention", "eta", "etd", "scfi", "wci", "3pl", "4pl", "aftn",
+];
 
 /**
  * 内容理解一步给每篇资料判的“内容类型”（写在 prompts/content-understanding.md 里，改了类型要同步改那份提示词）。
  * 评分提示词（prompts/selection-score.md）按类型给五个维度不同的权重。
  */
-export const ITEM_TYPES = ["model_release", "product_launch", "tool_or_prompt", "research_paper", "industry_event", "opinion_analysis", "tutorial_explainer"] as const;
+export const ITEM_TYPES = [
+  "capacity_change", "rate_move", "hub_disruption", "trade_policy", "carrier_corporate", "product_tech", "practice_guide", "opinion_analysis",
+] as const;
 
 // ── 标签词表 ────────────────────────────────────────────────────────────────────────────
 
 /** 每篇资料的第一个标签必须是这些“分类标签”之一。 */
 export const CATEGORY_TAGS = [
-  "产品更新", "模型发布", "论文/研究", "开源/仓库", "教程/实践", "现象/趋势", "大佬观点", "评测/基准", "安全/对齐", "行业动态", "政策/监管",
-  "非AI/通用工具", "其他",
+  "运力调整", "运价变动", "航线/网络", "港口仓储", "快递末端", "贸易合规", "公司动态", "融资并购", "物流科技", "事故Disruption", "实务指南", "分析观点", "其他",
 ] as const;
 
 /** 可选的主题标签。 */
 export const TOPIC_TAGS = [
-  "Agent", "编码", "推理", "多模态", "语音", "视频", "图像生成", "RAG", "端侧", "数据/训练", "搜索", "部署/工程", "开源生态", "具身智能", "MCP/工具调用",
+  "集装箱", "散货", "冷链", "跨境电商", "最后一公里", "碳排/ESG", "数字化", "自动化", "制裁合规", "旺季", "中欧班列", "美线", "欧线", "亚太", "中东/红海",
 ] as const;
 
-/** 可选的实体标签（公司、机构、平台）。 */
-export const ENTITY_TAGS = ["OpenAI", "Anthropic", "DeepSeek", "DeepMind", "Google", "Meta", "Microsoft", "xAI", "Hugging Face", "GitHub", "arXiv"] as const;
+/** 可选的实体标签（公司、机构、平台）。完整名录等确认后再补。 */
+export const ENTITY_TAGS = ["Maersk", "MSC", "COSCO", "Amazon", "Flexport"] as const;
 
-/** 模型常写的近义词，统一成词表里的写法。 */
+/** 模型常写的近义词，统一成词表里的写法。主题标签和实体标签不要写在这里，否则会被改写成分类标签。 */
 export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
-  "教程/玩法": "教程/实践", "技巧/最佳实践": "教程/实践", "合作/生态": "行业动态", "融资/收购": "行业动态", "公司动态": "行业动态",
-  合作: "行业动态", 生态: "行业动态", 融资: "行业动态", 收购: "行业动态", 投资: "行业动态", 并购: "行业动态",
-  政策: "政策/监管", 监管: "政策/监管", 法规: "政策/监管", 安全: "安全/对齐", 对齐: "安全/对齐",
-  论文: "论文/研究", 研究: "论文/研究", paper: "论文/研究", papers: "论文/研究",
-  "open-source": "开源/仓库", 开源: "开源/仓库", 仓库: "开源/仓库", repo: "开源/仓库",
-  教程: "教程/实践", 玩法: "教程/实践", 指南: "教程/实践", 技巧: "教程/实践", 最佳实践: "教程/实践", 实践: "教程/实践",
-  产品: "产品更新", 更新: "产品更新", 发布: "模型发布", 模型: "模型发布", 趋势: "现象/趋势", 现象: "现象/趋势", 观点: "大佬观点",
-  视频生成: "视频", 非ai: "非AI/通用工具", "non-ai": "非AI/通用工具", 通用工具: "非AI/通用工具", 工程工具: "非AI/通用工具",
-  安全扫描: "非AI/通用工具", devops: "非AI/通用工具", 行业: "行业动态", 动态: "行业动态",
+  运力: "运力调整", 舱位: "运力调整", 停航: "运力调整", 空班: "运力调整", capacity: "运力调整", blanking: "运力调整",
+  运价: "运价变动", 运费: "运价变动", 费率: "运价变动", rate: "运价变动", rates: "运价变动", "freight rate": "运价变动",
+  航线: "航线/网络", 班轮: "航线/网络", loop: "航线/网络",
+  港口: "港口仓储", 码头: "港口仓储", 仓库: "港口仓储", 仓储: "港口仓储", port: "港口仓储", terminal: "港口仓储", warehouse: "港口仓储",
+  快递: "快递末端", 末端: "快递末端", parcel: "快递末端", "last mile": "快递末端",
+  关税: "贸易合规", 制裁: "贸易合规", 海关: "贸易合规", 合规: "贸易合规", 出口管制: "贸易合规",
+  tariff: "贸易合规", tariffs: "贸易合规", sanction: "贸易合规", sanctions: "贸易合规", customs: "贸易合规",
+  人事: "公司动态", 诉讼: "公司动态", 合作: "公司动态",
+  融资: "融资并购", 并购: "融资并购", 收购: "融资并购", 投资: "融资并购",
+  tms: "物流科技", wms: "物流科技", 可见性: "物流科技", visibility: "物流科技",
+  事故: "事故Disruption", 中断: "事故Disruption", disruption: "事故Disruption",
+  指南: "实务指南", 实务: "实务指南", 教程: "实务指南", 实践: "实务指南", "how-to": "实务指南",
+  观点: "分析观点", 评论: "分析观点", 预测: "分析观点", commentary: "分析观点",
+  其他: "其他", other: "其他",
 };
 
 // ── 公司与主体 ──────────────────────────────────────────────────────────────────────────
@@ -72,84 +84,30 @@ export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
  * aliases 给结构抽取模型看；orgNames 是这家公司发消息时开头用的组织名（公司、实验室、团队），
  * 在它自己的主题页上读者知道说的是谁，可以省去；otherNames 是公司的其他称呼（官方账号名、子品牌）。
  * 所有这些名字都用来认出说的是哪家公司，比如把事实的主体对到发布方。
+ * 这里只放少量公开公司名作骨架，完整名录等确认后再补；不要编造域名。
  */
 export const ENTITIES: Record<string, { name: string; displayTag: string | null; aliases: string[]; orgNames?: string[]; otherNames?: string[] }> = {
-  "world-labs": { name: "World Labs", displayTag: null, aliases: ["World Labs"] },
-  "thinking-machines": { name: "Thinking Machines Lab", displayTag: null, aliases: ["Thinking Machines"] },
-  amd: { name: "AMD", displayTag: null, aliases: ["AMD", "Advanced Micro Devices"] },
-  openai: { name: "OpenAI", displayTag: "OpenAI", aliases: ["OpenAI", "ChatGPT", "Sora", "Codex", "GPT"], orgNames: ["OpenAI"], otherNames: ["OpenAI Developers"] },
-  anthropic: { name: "Anthropic", displayTag: "Anthropic", aliases: ["Anthropic", "Claude"], orgNames: ["Anthropic"], otherNames: ["Claude Code"] },
-  google: { name: "Google", displayTag: "Google", aliases: ["Google", "DeepMind", "Gemini", "谷歌"], orgNames: ["Google DeepMind", "Google Research", "Google", "DeepMind", "谷歌"], otherNames: ["Google AI", "Google Labs", "Google Cloud"] },
-  deepseek: { name: "DeepSeek", displayTag: "DeepSeek", aliases: ["DeepSeek", "深度求索"], orgNames: ["DeepSeek", "深度求索"] },
-  qwen: { name: "千问 Qwen", displayTag: null, aliases: ["Qwen", "通义", "阿里"], orgNames: ["通义千问", "通义实验室", "阿里巴巴", "阿里云", "阿里", "Qwen Team", "Qwen", "Alibaba"], otherNames: ["千问", "千问APP", "Alibaba Cloud"] },
-  kimi: { name: "Kimi / 月之暗面", displayTag: null, aliases: ["Kimi", "月之暗面", "Moonshot"], orgNames: ["Moonshot AI", "月之暗面", "Kimi"] },
-  minimax: { name: "MiniMax", displayTag: null, aliases: ["MiniMax", "海螺"], orgNames: ["MiniMax", "稀宇科技"] },
-  zhipu: { name: "智谱 GLM", displayTag: null, aliases: ["智谱", "GLM", "Z.ai"], orgNames: ["智谱AI", "智谱", "Zhipu AI", "Z.ai"], otherNames: ["Zhipu"] },
-  xai: { name: "xAI", displayTag: "xAI", aliases: ["xAI", "Grok"], orgNames: ["SpaceX Super Intelligence", "SpaceXAI", "SpaceXSI", "xAI"], otherNames: ["Grok Bot"] },
-  meta: { name: "Meta", displayTag: "Meta", aliases: ["Meta", "Llama"], orgNames: ["Meta Superintelligence Labs", "Meta AI", "Meta"], otherNames: ["AI at Meta", "Muse"] },
-  microsoft: { name: "Microsoft", displayTag: "Microsoft", aliases: ["Microsoft", "微软", "Copilot"], orgNames: ["Microsoft Research", "Microsoft AI", "Microsoft", "微软"] },
-  nvidia: { name: "NVIDIA", displayTag: null, aliases: ["NVIDIA", "英伟达"], orgNames: ["NVIDIA", "英伟达"] },
-  "hugging-face": { name: "Hugging Face", displayTag: "Hugging Face", aliases: ["Hugging Face"], orgNames: ["Hugging Face", "HuggingFace"] },
-  cursor: { name: "Cursor", displayTag: null, aliases: ["Cursor", "Anysphere"], orgNames: ["Cursor"] },
-  openrouter: { name: "OpenRouter", displayTag: null, aliases: ["OpenRouter"], orgNames: ["OpenRouter"] },
+  maersk: { name: "Maersk", displayTag: "Maersk", aliases: ["Maersk", "马士基"], orgNames: ["A.P. Moller - Maersk", "Maersk"], otherNames: ["Maersk Line"] },
+  msc: { name: "MSC", displayTag: "MSC", aliases: ["MSC", "地中海航运"], orgNames: ["Mediterranean Shipping Company", "MSC"] },
+  cosco: { name: "COSCO", displayTag: "COSCO", aliases: ["COSCO", "中远海运"], orgNames: ["COSCO Shipping", "中远海运"] },
+  amazon: { name: "Amazon", displayTag: "Amazon", aliases: ["Amazon", "亚马逊"], orgNames: ["Amazon"] },
+  flexport: { name: "Flexport", displayTag: "Flexport", aliases: ["Flexport"], orgNames: ["Flexport"] },
 };
 
 /**
  * 身份词典：摘要和标题里出现的公司，必须在原文里也出现过，否则退回原标题、丢掉摘要（防止模型张冠李戴）。
- * 行业没有这个问题时可以留空数组。
+ * 与上面的少量主体一致。行业没有这个问题时可以留空数组。
  */
 export const IDENTITY_LEXICON: ReadonlyArray<{ id: string; name: string; patterns: RegExp[] }> = [
-  { id: "openai", name: "OpenAI", patterns: [/openai|chatgpt|\bgpt-?[o\d]|\bsora\b|\bcodex\b/i] },
-  { id: "anthropic", name: "Anthropic", patterns: [/anthropic|\bclaude\b/i, /\b(?:opus|sonnet|haiku)\s*\d+(?:[.\-]\d+)*\b/i, /\bfable\s*\d+(?:[.\-]\d+)*\b|\bmythos\b/i] },
-  { id: "google", name: "Google / Gemini", patterns: [/google|deepmind|\bgemini\b|notebooklm|\bveo\s?\d|\bAlphaFold\b|\bAMIE\b/i] },
-  { id: "deepseek", name: "DeepSeek", patterns: [/deepseek|深度求索/i] },
-  { id: "xai", name: "xAI / Grok", patterns: [/\bxai\b|\bgrok\b/i] },
-  { id: "meta", name: "Meta / Llama", patterns: [/\bMeta\b/, /\bmeta\s?ai\b|\bllama\b/i] },
-  { id: "microsoft", name: "Microsoft / Copilot", patterns: [/microsoft|copilot|微软/i] },
-  { id: "nvidia", name: "NVIDIA", patterns: [/nvidia|英伟达|\bnemotron\b|\bnemo\b|\bblackwell\b|\brubin(?:\s+ultra)?\b|\bcuda\b/i] },
-  { id: "qwen", name: "千问 Qwen", patterns: [/\bqwen|通义|千问/i] },
-  { id: "hugging-face", name: "Hugging Face", patterns: [/hugging\s?face/i] },
-  { id: "cursor", name: "Cursor", patterns: [/\bCursor\b/] },
-  { id: "kimi", name: "Kimi / 月之暗面", patterns: [/\bkimi\b|月之暗面|\bmoonshot\s?ai\b/i] },
-  { id: "openrouter", name: "OpenRouter", patterns: [/openrouter/i] },
-  { id: "minimax", name: "MiniMax", patterns: [/minimax/i] },
-  { id: "zhipu", name: "智谱 GLM", patterns: [/智谱|\bglm-?[4-9]/i] },
-  { id: "hunyuan", name: "腾讯混元", patterns: [/混元|hunyuan/i] },
-  { id: "doubao", name: "字节豆包", patterns: [/豆包|doubao|字节跳动|bytedance/i] },
-  { id: "mistral", name: "Mistral", patterns: [/mistral/i] },
-  { id: "perplexity", name: "Perplexity", patterns: [/\bPerplexity\b/] },
-  { id: "runway", name: "Runway", patterns: [/\brunway\b/i] },
-  { id: "suno", name: "Suno", patterns: [/\bsuno\b/i] },
-  { id: "midjourney", name: "Midjourney", patterns: [/midjourney/i] },
-  { id: "stability-ai", name: "Stability AI", patterns: [/stability\s?ai/i] },
-  { id: "elevenlabs", name: "ElevenLabs", patterns: [/eleven\s?labs/i] },
-  { id: "vllm", name: "vLLM", patterns: [/\bvllm\b/i] },
-  { id: "ollama", name: "Ollama", patterns: [/\bollama\b/i] },
-  { id: "windsurf", name: "Windsurf", patterns: [/windsurf/i] },
-  { id: "devin", name: "Devin", patterns: [/\bdevin\b/i] },
-  { id: "manus", name: "Manus", patterns: [/\bmanus\b/i] },
-  { id: "apple", name: "Apple AI", patterns: [/\bapple\s?(intelligence|silicon|ai)\b|苹果(智能|\s?AI)/i] },
-  { id: "amazon", name: "Amazon / AWS", patterns: [/amazon|\baws\b|亚马逊/i] },
-  { id: "baidu", name: "百度文心", patterns: [/百度|baidu|文心|\bernie\s?bot\b/i] },
+  { id: "maersk", name: "Maersk", patterns: [/maersk|马士基/i] },
+  { id: "msc", name: "MSC", patterns: [/\bMSC\b|地中海航运/] },
+  { id: "cosco", name: "COSCO", patterns: [/cosco|中远海运/i] },
+  { id: "amazon", name: "Amazon", patterns: [/\bamazon\b|亚马逊/i] },
+  { id: "flexport", name: "Flexport", patterns: [/flexport/i] },
 ];
 
-/** 这些域名上的文章，发布方就是对应的公司（托管平台如 GitHub、arXiv 不算）。 */
-export const PUBLISHER_DOMAINS: ReadonlyArray<{ entityId: string; domains: readonly string[] }> = [
-  { entityId: "openai", domains: ["openai.com"] },
-  { entityId: "anthropic", domains: ["anthropic.com", "claude.com"] },
-  { entityId: "google", domains: ["deepmind.google", "ai.google", "blog.google"] },
-  { entityId: "deepseek", domains: ["deepseek.com"] },
-  { entityId: "xai", domains: ["x.ai"] },
-  { entityId: "meta", domains: ["ai.meta.com"] },
-  { entityId: "microsoft", domains: ["microsoft.com"] },
-  { entityId: "nvidia", domains: ["nvidia.com"] },
-  { entityId: "qwen", domains: ["qwen.ai"] },
-  { entityId: "cursor", domains: ["cursor.com"] },
-  { entityId: "openrouter", domains: ["openrouter.ai"] },
-];
+/** 这些域名上的文章，发布方就是对应的公司（托管平台不算）。域名等名录确认后再填，不编造。 */
+export const PUBLISHER_DOMAINS: ReadonlyArray<{ entityId: string; domains: readonly string[] }> = [];
 
-/** 原文里的这些写法也算提到了对应公司。 */
-export const IDENTITY_CONTEXT_ALIASES: ReadonlyArray<{ entityId: string; pattern: RegExp }> = [
-  { entityId: "meta", pattern: /@AIatMeta\b/i },
-  { entityId: "zhipu", pattern: /\bZhipu(?:\s+AI\b|['’]s\b)/i },
-];
+/** 原文里的这些写法也算提到了对应公司。与上面的主体一致；暂无额外账号名。 */
+export const IDENTITY_CONTEXT_ALIASES: ReadonlyArray<{ entityId: string; pattern: RegExp }> = [];
