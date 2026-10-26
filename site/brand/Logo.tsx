@@ -1,12 +1,15 @@
-// 站点的字标和圆环标记：页面用 Wordmark 画站名（size 是高度，单位像素），RingMark 是小标记，转起来就是加载动画。
-// 这里用站名排字；有自己的 Logo 时，把 Wordmark 换成你的 SVG（保持同样的参数）。
-import { SITE } from "../site.ts";
+// 站点字标：货箱加一截缆绳，强调色跟主题的航标琥珀走。页面上的站名是 FreightWire。
+// size 是高度，单位像素。有自己的图形时保持 Wordmark 的参数不变。RingMark 是加载用的圆环。
+const WORDMARK = "FreightWire";
 
-export function Wordmark({ size = 24, className = "", title = SITE.name }: { size?: number; className?: string; title?: string }) {
+export function Wordmark({ size = 24, className = "", title = WORDMARK }: { size?: number; className?: string; title?: string }) {
   return (
-    <span className={`inline-flex items-center font-black leading-none tracking-[-0.03em] ${className}`} style={{ fontSize: Math.round(size * 0.92) }} aria-label={title} role="img">
-      <span aria-hidden="true" className="mr-[0.3em] inline-block size-[0.42em] rounded-full bg-accent" />
-      <span aria-hidden="true">{SITE.name}</span>
+    <span className={`inline-flex items-center font-black leading-none tracking-[-0.04em] ${className}`} style={{ fontSize: Math.round(size * 0.92) }} aria-label={title} role="img">
+      <svg viewBox="0 0 28 24" className="mr-[0.28em] h-[0.78em] w-[0.92em] shrink-0" aria-hidden="true">
+        <rect x="0.5" y="1" width="15" height="22" rx="1.6" className="fill-current" />
+        <rect x="12.25" y="9.25" width="15.25" height="5.5" rx="1.1" className="fill-accent" />
+      </svg>
+      <span aria-hidden="true">{WORDMARK}</span>
     </span>
   );
 }
